@@ -99,8 +99,7 @@ public class Game
      */
     private void printLocationInfo()
     {
-        System.out.println("You are " + currentRoom.getDescription());
-        System.out.print("Exits: "+ currentRoom.getExitString());
+        System.out.println(currentRoom.getLongDescription());
         System.out.println();
     }
 
@@ -128,6 +127,12 @@ public class Game
         else if (commandWord.equals("quit")) {
             wantToQuit = quit(command);
         }
+        else if (commandWord.equals("look")) {
+            look(command);
+        }
+        else if (commandWord.equals("buy")) {
+            System.out.println("You're too broke to buy anything.");
+        }
 
         return wantToQuit;
     }
@@ -138,6 +143,7 @@ public class Game
      * Print out some help information.
      * Here we print some stupid, cryptic message and a list of the 
      * command words.
+     * Modified for Question 16
      */
     private void printHelp() 
     {
@@ -145,7 +151,7 @@ public class Game
         System.out.println("around the store.");
         System.out.println();
         System.out.println("Your command words are:");
-        System.out.println("   go quit help");
+        parser.showCommands();
     }
 
     /** 
@@ -188,6 +194,21 @@ public class Game
         else {
             // signal that we want to quit
             return true;  
+        }
+    }
+    
+    /**
+     * Look around the room.
+     * Answer to Question 14
+     */
+    private void look(Command command)
+    {
+        if(command.hasSecondWord()) {
+            System.out.println("Look at what?");
+        }
+        else {
+            System.out.println("You analyze your surroundings.");
+            printLocationInfo();
         }
     }
 }

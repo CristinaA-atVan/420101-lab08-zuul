@@ -1,4 +1,6 @@
 import java.util.HashMap;
+import java.util.Set;
+
 /**
  * Class Room - a room in an adventure game.
  *
@@ -22,6 +24,7 @@ public class Room
      * Create a room described "description". Initially, it has no exits. 
      * "description" is something like "a kitchen" or "an open court yard".
      * @param description The room's description.
+     * Modified for Question 8
      */
     public Room(String description) 
     {
@@ -32,43 +35,32 @@ public class Room
     /**
      * Define the exits of this room.  Every direction either leads
      * to another room or is null (no exit there).
-     * @param north The north exit.
-     * @param east The east east.
-     * @param south The south exit.
-     * @param west The west exit.
+     * @param direction The direction of the exit.
+     * @param neighbor The neighboring room(s).
+     * Modified for Question 8
      */
     public void setExits(String direction, Room neighbor) 
     {
         exits.put(direction, neighbor);
     }
-
+    
     /**
-     * @return The description of the room.
+     * Get a long description of the room
+     * Answer to Question 11
      */
-    public String getDescription()
+    public String getLongDescription()
     {
-        return description;
+        return "You are " + description + ".\n" + getExitString();
     }
     
     /**
      * Get the next room
      * Answer to Question 6
+     * Rewritten so it actually works
      */
     public Room getExit(String direction)
     {
-        if(direction.equals("north")) {
-            return northExit;
-        }
-        if(direction.equals("east")) {
-            return eastExit;
-        }
-        if(direction.equals("south")) {
-            return southExit;
-        }
-        if(direction.equals("west")) {
-            return westExit;
-        }
-        return null;
+        return exits.get(direction);
     }
     
     /**
@@ -76,26 +68,15 @@ public class Room
      * for example, "Exits: north west".
      * @return A description of the available exits.
      * Answer to Question 7
+     * Rewritten for Question 10
      */
     public String getExitString()
     {
-        String nExit, eExit, sExit, wExit;
-        nExit = "";
-        eExit = "";
-        sExit = "";
-        wExit = "";
-        if(northExit != null) {
-            nExit = "north ";
+        String returnString = "Exits:";
+        Set<String> keys = exits.keySet();
+        for(String exit : keys) {
+            returnString += " " + exit;
         }
-        if(eastExit != null) {
-            eExit = "east ";
-        }
-        if(southExit != null) {
-            sExit = "south ";
-        }
-        if(westExit != null) {
-            wExit = "west ";
-        }
-        return nExit + eExit + sExit + wExit;
+        return returnString;
     }
 }

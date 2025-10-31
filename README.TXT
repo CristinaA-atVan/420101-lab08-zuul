@@ -1,4 +1,4 @@
-Project: zuul-bad
+Project: zuul-game
 Authors: Michael Kölling and David J. Barnes
 
 This project is part of the material for the book
@@ -24,3 +24,7 @@ project, and how to fix them.
 
 The project 'zuul-better' contains a version of this project with better
 designed class structure. It includes the fixes discussed in the book.
+
+13. The positions of the exit words are randomized
+17. Yes, to add the functionality of the new command
+18. Yeah, I think it would be more efficient, but I'm too stupid to figure out why.
